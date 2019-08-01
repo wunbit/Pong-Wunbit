@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 30;
+    public GameManager gameManager;
     //private Rigidbody2D rb2d;
     void FixedUpdate()
     {
         float v = Input.GetAxisRaw("Vertical");
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, v * speed);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(0, v * gameManager.PlayerSpeed);
     }
 }
