@@ -7,6 +7,8 @@ TagManager:
   - Paddle
   - Ball
   - Score
+  - ScoreLeft
+  - ScoreRight
   layers:
   - Default
   - TransparentFX

@@ -17,11 +17,13 @@ public class Enemy : MonoBehaviour
     {
         Vector2 Aipos = GetComponent<Transform>().position;
         Vector2 Ballpos = ball.transform.position;
-        if (Ballpos.y > Aipos.y/2)
+        //float aiposy = Aipos.y;
+        //float ballposy = Ballpos.y;
+        if (Ballpos.y > Aipos.y+1.5)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1 * gameManager.EnemySpeed);
         }
-        if (Ballpos.y < Aipos.y/2)
+        if (Ballpos.y < Aipos.y-1.5)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * gameManager.EnemySpeed);
         }
