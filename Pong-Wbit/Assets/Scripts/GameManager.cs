@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -61,6 +62,11 @@ public class GameManager : MonoBehaviour
         enemytext.text =  enemyScore.ToString();
     }
 
+    void RestartGame()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -72,6 +78,10 @@ public class GameManager : MonoBehaviour
             Enemy.ResetPosition();
             //Debug.Log("You win");
             endText.text = "You WIN";
+            if (Input.anyKey)
+            {
+                Invoke("RestartGame", 0);
+            }
         }
         if (enemyScore == endScore)
         {
@@ -81,6 +91,10 @@ public class GameManager : MonoBehaviour
             Enemy.ResetPosition();
             //Debug.Log("You lose");
             endText.text = "You LOSE";
+            if (Input.anyKey)
+            {
+                Invoke("RestartGame", 0);
+            }
         }
     }
 }
