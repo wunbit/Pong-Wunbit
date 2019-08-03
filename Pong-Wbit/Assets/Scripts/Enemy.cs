@@ -6,10 +6,17 @@ public class Enemy : MonoBehaviour
 {
     public GameManager gameManager;
     public Ball ball;
+    private float speed;
     // Start is called before the first frame update
     void Start()
     {
-        
+        speed = gameManager.EnemySpeed;
+    }
+
+    public void ResetPosition()
+    {
+        GetComponent<Rigidbody2D>().position = new Vector2(6.75f,0);
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     // Update is called once per frame
@@ -19,13 +26,17 @@ public class Enemy : MonoBehaviour
         Vector2 Ballpos = ball.transform.position;
         //float aiposy = Aipos.y;
         //float ballposy = Ballpos.y;
-        if (Ballpos.y > Aipos.y+1.5)
+        if (!gameManager.gameOver)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1 * gameManager.EnemySpeed);
+            if (Ballpos.y > Aipos.y+1.5)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1 * speed);
+            }
+            if (Ballpos.y < Aipos.y-1.5)
+            {
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * speed);
+            }
         }
-        if (Ballpos.y < Aipos.y-1.5)
-        {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * gameManager.EnemySpeed);
-        }
+        
     }
 }

@@ -5,10 +5,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameManager gameManager;
+    private float speed;
     //private Rigidbody2D rb2d;
+    void Start()
+    {
+        speed = gameManager.PlayerSpeed;
+    }
+
+    public void ResetPosition()
+    {
+        GetComponent<Rigidbody2D>().position = new Vector2(-6.75f,0);
+    }
     void FixedUpdate()
     {
-        float v = Input.GetAxisRaw("Vertical");
-        GetComponent<Rigidbody2D>().velocity = new Vector2(0, v * gameManager.PlayerSpeed);
+        if (!gameManager.gameOver)
+        {
+            float v = Input.GetAxisRaw("Vertical");
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, v * speed);
+        }
     }
 }

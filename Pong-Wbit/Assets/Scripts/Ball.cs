@@ -7,19 +7,29 @@ public class Ball : MonoBehaviour
     public GameManager gameManager;
     private Rigidbody2D rb2d;
     private float speed;
+    private float initialspeed;
+    private float reboundSpeed;
     private bool playerscored;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        reboundSpeed = gameManager.ReboundAddSpeed;
+        initialspeed = gameManager.BallSpeed;
         playerscored = true;
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+    public void StopBall()
+    {
+        rb2d.velocity = Vector2.zero;
+        rb2d.transform.position = Vector2.zero;
+    }
+
     public void BallStart()
     {
-        speed = gameManager.BallSpeed;
+        speed = initialspeed;
         if (playerscored)
         {
             rb2d.velocity = Vector2.right * speed;
@@ -42,7 +52,7 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        speed += gameManager.ReboundAddSpeed;
+        speed += reboundSpeed;
         if (col.gameObject.tag == "Paddle")
         {
             float y = hitFactor(transform.position, col.transform.position, col.collider.bounds.size.y);
@@ -61,14 +71,16 @@ public class Ball : MonoBehaviour
         {
             rb2d.velocity = Vector2.zero;
             rb2d.transform.position = Vector2.zero;
-            BallStart();
+            gameManager.EnemyScore();
+            Invoke("BallStart", 2);
         }
         if (col.gameObject.tag == "ScoreRight")
         {
             rb2d.velocity = Vector2.zero;
             rb2d.transform.position = Vector2.zero;
             playerscored = true;
-            BallStart();
+            gameManager.PlayerScore();
+            Invoke("BallStart", 2);
         }
 
     }
