@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         Vector2 Aipos = GetComponent<Transform>().position;
         Vector2 Ballpos = ball.transform.position;
@@ -30,11 +30,13 @@ public class Enemy : MonoBehaviour
         {
             if (Ballpos.y > Aipos.y+1.5)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, 1 * speed);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
+                //transform.position = new Vector2 (6.75f, speed * Time.deltaTime);
             }
             if (Ballpos.y < Aipos.y-1.5)
             {
-                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -1 * speed);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(0, -speed);
+                //transform.position = new Vector2 (6.75f, -speed * Time.deltaTime);
             }
         }
         
