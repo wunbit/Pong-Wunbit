@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             Player.ResetPosition();
             Enemy.ResetPosition();
             //Debug.Log("You win");
-            endText.text = "You WIN";
+            endText.text = "You WIN \n \n Press Any key to Restart";
             if (Input.anyKey)
             {
                 Invoke("RestartGame", 0);
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             Player.ResetPosition();
             Enemy.ResetPosition();
             //Debug.Log("You lose");
-            endText.text = "You LOSE";
+            endText.text = "You LOSE \n \n Press Any key to Restart";
             if (Input.anyKey)
             {
                 Invoke("RestartGame", 0);

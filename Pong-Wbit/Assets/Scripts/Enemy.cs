@@ -12,33 +12,35 @@ public class Enemy : MonoBehaviour
     {
         speed = gameManager.EnemySpeed;
     }
-
     public void ResetPosition()
     {
         GetComponent<Rigidbody2D>().position = new Vector2(6.75f,0);
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
-
     // Update is called once per frame
     void Update()
     {
         Vector2 Aipos = GetComponent<Transform>().position;
         Vector2 Ballpos = ball.transform.position;
-        //float aiposy = Aipos.y;
-        //float ballposy = Ballpos.y;
         if (!gameManager.gameOver)
         {
             if (Ballpos.y > Aipos.y+1.5)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, speed);
-                //transform.position = new Vector2 (6.75f, speed * Time.deltaTime);
+                //Debug.Log("moving Up");
+                //transform.position += new Vector3 (0, speed * Time.deltaTime, 0); //this is too slow and choppy, though it does stop w
             }
             if (Ballpos.y < Aipos.y-1.5)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, -speed);
-                //transform.position = new Vector2 (6.75f, -speed * Time.deltaTime);
+                //Debug.Log("moving Down");
+                //transform.position += new Vector3 (0, -speed * Time.deltaTime, 0);
+            }
+            if (Ballpos.y <= Aipos.y+0.05 && Ballpos.y >= Aipos.y-0.05)
+            {
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                //Debug.Log("Not Moving");
             }
         }
-        
     }
 }
